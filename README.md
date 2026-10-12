@@ -51,7 +51,7 @@ Made **for the community**, **by the community**. Use it, fork it, remix it — 
 > _Coming soon — link will be added after deployment._
 
 ```
-https://<your-domain>/
+https://9a2f02b5.poke-alliance-pokemon-builder.pages.dev/
 ```
 
 ---
