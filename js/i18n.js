@@ -12,6 +12,7 @@ const I18N = {
     title: "PokeAlliance Pokémon Builder",
     subtitle: "Calculate the total investment to build your Pokémon.",
     credit: "Created by",
+    creditsTo: "Credits to",
 
     /* Hero banner */
     heroChange: "Change banner",
@@ -115,6 +116,7 @@ const I18N = {
     title: "Constructor Pokémon de PokeAlliance",
     subtitle: "Calcula la inversión total para construir tu Pokémon.",
     credit: "Creado por",
+    creditsTo: "Créditos a",
 
     heroChange: "Cambiar banner",
 
@@ -208,6 +210,7 @@ const I18N = {
     title: "Construtor Pokémon da PokeAlliance",
     subtitle: "Calcule o investimento total para construir seu Pokémon.",
     credit: "Criado por",
+    creditsTo: "Créditos a",
 
     heroChange: "Alterar banner",
 

@@ -250,11 +250,23 @@ See [`LICENSE`](./LICENSE) or [unlicense.org](https://unlicense.org) for details
 ## 🙌 Credits
 
 - **Created by:** [**Mune-dev-il**](https://github.com/Mune-dev-il)
+- **Credits to:** **Nocta** — Discord: `strix_gg`
 - **Built for:** The PokeAlliance community
 - **Fonts:** [Inter](https://rsms.me/inter/) by Rasmus Andersson
 - **Icons:** Inline SVG (no icon library)
 - **Utilities:** [Tailwind CSS](https://tailwindcss.com/)
 
+### 💡 Inspiration
+
+This project was **inspired by Nocta** (`strix_gg`), who originally built a **Ditto-only** investment calculator for PokeAlliance. Seeing how useful that tool was — but how limited it was to a single Pokémon — pushed me to **optimize the idea and build a more general version** that works for **any Pokémon build**:
+
+- Any ball type (UB / AB / PB) instead of a fixed Ditto scenario.
+- Full cost coverage: Shiny DNA, memories, X-Held / Y-Held tiers, attack training and extras.
+- Multi-language UI (EN / ES / PT).
+- A single in-game export string you can paste straight into chat.
+
+Thanks Nocta — this wouldn't exist without your original tool. 🙏
+- original tool: https://pokealliance-strix-tools.pages.dev/
 ---
 
 ## ⚖️ Legal Notice
@@ -343,6 +355,21 @@ Cualquiera puede hacer **absolutamente cualquier cosa** con este proyecto:
 ### 🙌 Créditos
 
 Creado por [**Mune-dev-il**](https://github.com/Mune-dev-il) para la comunidad de **PokeAlliance**.
+
+**Créditos a Nocta** — Discord: `strix_gg`.
+
+### 💡 Inspiración
+
+Este proyecto nació **inspirado por Nocta** (`strix_gg`), que originalmente hizo una calculadora enfocada **solo en Ditto**. Ver lo útil que era — pero lo limitada que quedaba a un único Pokémon — me motivó a **optimizar la idea y crear una versión más general** que sirviera para **cualquier build**:
+
+- Cualquier ball (UB / AB / PB) en lugar de un escenario fijo de Ditto.
+- Cobertura completa de costos: Shiny DNA, recuerdos, X-Held / Y-Held, entrenamiento de ataque y extras.
+- Interfaz multi-idioma (EN / ES / PT).
+- Una cadena de export lista para pegar en el chat del juego.
+
+Gracias Nocta — sin tu herramienta original esto no existiría. 🙏
+
+ - herramienta original: https://pokealliance-strix-tools.pages.dev/
 
 ### ⚖️ Aviso legal
 
