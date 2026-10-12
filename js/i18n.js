@@ -42,8 +42,8 @@ const I18N = {
     s1sub: "Server economy setup",
     diamondPrice: "Diamond price (Pokédollars per DD)",
     diamondPriceHelp: "Set the current Diamond price on your server",
-    dittoBall: "Normal Ditto ball",
-    dittoPrice: "Normal Ditto price",
+    dittoBall: "Normal Pokemon ball",
+    dittoPrice: "Normal Pokemon price",
     ddEquiv: "DD equivalent",
 
     /* Section 2 */
@@ -54,7 +54,7 @@ const I18N = {
     no: "No",
     dnaFixed: "Fixed cost",
     totalMemories: "Total memories",
-    memoryHelp: "Non-cumulative cost table: 1→0 DD, 2→40 DD, 3→50 DD, 4→60 DD, 5→70 DD, 6→80 DD",
+    memoryHelp: "Non-cumulative cost table: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
     memoryCost: "Memories cost",
     dnaTotal: "DNA + memories total",
 
@@ -81,7 +81,7 @@ const I18N = {
     trainCostDd: "Training cost (DD)",
     ddPerCharger: "DD per 20K charger",
     formulaTitle: "Formula",
-    formula: "Charges(L) = 50 × L × (L + 1). Used = Charges(current) + progress% × [Charges(current+1) − Charges(current)]. Remaining = Charges(target) − Used. Each 20K charger = 20,000 charges = 1 hour. Cost = (Remaining ÷ 20,000) × DD per charger.",
+    formula: "Formula not available yet.",
 
     /* Section 5 */
     s5: "Other Expenses",
@@ -93,7 +93,7 @@ const I18N = {
     tblComponent: "Component",
     tblPd: "Pokédollars ($)",
     tblDd: "Diamonds (DD)",
-    rowDitto: "Normal Ditto",
+    rowDitto: "Normal Pokemon",
     rowDna: "Shiny DNA",
     rowMem: "Extra memories",
     rowX: "X-Held",
@@ -141,8 +141,8 @@ const I18N = {
     s1sub: "Configuración de la economía del servidor",
     diamondPrice: "Precio del diamante (Pokédollars por DD)",
     diamondPriceHelp: "Define el precio actual del Diamante en tu servidor",
-    dittoBall: "Ball del Ditto normal",
-    dittoPrice: "Precio del Ditto normal",
+    dittoBall: "Ball del Pokemon normal",
+    dittoPrice: "Precio del Pokemon normal",
     ddEquiv: "Equivalente en DD",
 
     s2: "ADN Shiny y recuerdos",
@@ -152,7 +152,7 @@ const I18N = {
     no: "No",
     dnaFixed: "Costo fijo",
     totalMemories: "Recuerdos totales",
-    memoryHelp: "Tabla de costos no acumulativos: 1→0 DD, 2→40 DD, 3→50 DD, 4→60 DD, 5→70 DD, 6→80 DD",
+    memoryHelp: "Tabla de costos no acumulativos: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
     memoryCost: "Costo de recuerdos",
     dnaTotal: "Total ADN + recuerdos",
 
@@ -177,7 +177,7 @@ const I18N = {
     trainCostDd: "Costo de entrenamiento (DD)",
     ddPerCharger: "DD por cargador de 20K",
     formulaTitle: "Fórmula",
-    formula: "Cargas(L) = 50 × L × (L + 1). Usadas = Cargas(actual) + progreso% × [Cargas(actual+1) − Cargas(actual)]. Restantes = Cargas(objetivo) − Usadas. Cada cargador de 20K = 20.000 cargas = 1 hora. Costo = (Restantes ÷ 20.000) × DD por cargador.",
+    formula: "Fórmula no disponible aún.",
 
     s5: "Otros gastos",
     s5sub: "Cualquier otro gasto",
@@ -187,7 +187,7 @@ const I18N = {
     tblComponent: "Componente",
     tblPd: "Pokédollars ($)",
     tblDd: "Diamantes (DD)",
-    rowDitto: "Ditto normal",
+    rowDitto: "Pokemon normal",
     rowDna: "ADN Shiny",
     rowMem: "Recuerdos extra",
     rowX: "X-Held",
@@ -234,8 +234,8 @@ const I18N = {
     s1sub: "Configuração da economia do servidor",
     diamondPrice: "Preço do diamante (Pokédollars por DD)",
     diamondPriceHelp: "Defina o preço atual do Diamante no seu servidor",
-    dittoBall: "Ball do Ditto normal",
-    dittoPrice: "Preço do Ditto normal",
+    dittoBall: "Ball do Pokemon normal",
+    dittoPrice: "Preço do Pokemon normal",
     ddEquiv: "Equivalente em DD",
 
     s2: "DNA Shiny e memórias",
@@ -245,7 +245,7 @@ const I18N = {
     no: "Não",
     dnaFixed: "Custo fixo",
     totalMemories: "Total de memórias",
-    memoryHelp: "Tabela de custos não cumulativos: 1→0 DD, 2→40 DD, 3→50 DD, 4→60 DD, 5→70 DD, 6→80 DD",
+    memoryHelp: "Tabela de custos não cumulativos: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
     memoryCost: "Custo das memórias",
     dnaTotal: "Total DNA + memórias",
 
@@ -270,7 +270,7 @@ const I18N = {
     trainCostDd: "Custo do treino (DD)",
     ddPerCharger: "DD por carregador de 20K",
     formulaTitle: "Fórmula",
-    formula: "Cargas(L) = 50 × L × (L + 1). Usadas = Cargas(atual) + progresso% × [Cargas(atual+1) − Cargas(atual)]. Restantes = Cargas(objetivo) − Usadas. Cada carregador de 20K = 20.000 cargas = 1 hora. Custo = (Restantes ÷ 20.000) × DD por carregador.",
+    formula: "Fórmula ainda não disponível.",
 
     s5: "Outras despesas",
     s5sub: "Qualquer outro gasto",
@@ -280,7 +280,7 @@ const I18N = {
     tblComponent: "Componente",
     tblPd: "Pokédollars ($)",
     tblDd: "Diamantes (DD)",
-    rowDitto: "Ditto normal",
+    rowDitto: "Pokemon normal",
     rowDna: "DNA Shiny",
     rowMem: "Memórias extras",
     rowX: "X-Held",
