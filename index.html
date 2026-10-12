@@ -8,50 +8,99 @@
 <!-- Favicon -->
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-<!-- Tailwind (utilidades) -->
+<!-- Tailwind CDN + theme extend -->
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        },
+        keyframes: {
+          'pulse-soft': {
+            '0%,100%': { opacity: '1' },
+            '50%':     { opacity: '.35' },
+          },
+          rise: {
+            from: { opacity: '0', transform: 'translateY(14px)' },
+            to:   { opacity: '1', transform: 'none' },
+          },
+        },
+        animation: {
+          'pulse-soft': 'pulse-soft 2s infinite',
+          rise: 'rise .55s cubic-bezier(.16,1,.3,1) both',
+        },
+      },
+    },
+  };
+</script>
 
 <!-- Tipografía -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- ============================================================
-     ESTILOS  (orden importa: base → componentes → layout → animaciones)
-     ============================================================ -->
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/animations.css">
+<!-- Solo lo que NO se puede expresar con utilidades -->
+<link rel="stylesheet" href="css/app.css">
 </head>
 
-<body>
+<body class="min-h-screen font-sans text-[#e6e8f5] bg-[#0d0b21] antialiased">
 
 <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
 
   <!-- ============================================================
-       HERO BANNER  (imagen fija + contenido superpuesto)
+       HERO BANNER
        ============================================================ -->
-  <header class="hero-banner rise mb-8" id="heroBanner">
+  <header id="heroBanner"
+    class="animate-rise mb-8 relative overflow-hidden isolate rounded-[1.25rem]
+           border border-indigo-700/50
+           min-h-[220px] md:min-h-[280px] lg:min-h-[320px]
+           bg-[radial-gradient(120%_160%_at_12%_10%,rgba(99,102,241,.35),transparent_55%),radial-gradient(120%_160%_at_100%_100%,rgba(45,212,191,.18),transparent_55%),linear-gradient(135deg,#1a1440_0%,#2a1e5c_50%,#0f0a2e_100%)]
+           shadow-[0_30px_70px_-30px_rgba(0,0,0,.95),0_0_0_1px_rgba(45,212,191,.08),inset_0_1px_0_rgba(255,255,255,.05)]">
 
-    <!-- Imagen de fondo (banner del creador) -->
-    <img class="hero-banner__img" id="heroBannerImg" alt="">
+    <!-- Imagen de fondo -->
+    <img id="heroBannerImg" alt=""
+         class="absolute inset-0 w-full h-full object-cover object-center z-0
+                hidden [.has-image_&]:block">
 
-    <!-- Overlay para legibilidad del texto -->
-    <div class="hero-banner__overlay"></div>
+    <!-- Overlay -->
+    <div class="absolute inset-0 z-[1] pointer-events-none opacity-35 [.has-image_&]:opacity-100
+                bg-[linear-gradient(90deg,rgba(13,11,33,.94)_0%,rgba(13,11,33,.78)_32%,rgba(13,11,33,.35)_60%,rgba(13,11,33,.05)_100%),linear-gradient(180deg,rgba(13,11,33,.15)_0%,rgba(13,11,33,0)_45%,rgba(13,11,33,.6)_100%)]"></div>
 
-    <!-- Contenido superpuesto -->
-    <div class="hero-banner__content">
+    <!-- Contenido -->
+    <div class="relative z-[2] flex flex-col gap-5 p-6 lg:px-10 lg:py-8 min-h-[inherit]">
 
-      <!-- Esquina superior derecha: idiomas + crédito -->
-      <div class="hero-banner__corner">
+      <!-- Esquina superior derecha -->
+      <div class="flex flex-col gap-2.5 items-start lg:items-end lg:self-end">
+
         <div class="flex items-center gap-2" role="group" aria-label="Language">
-          <button class="lang-btn active" data-lang="en">English</button>
-          <button class="lang-btn" data-lang="es">Español</button>
-          <button class="lang-btn" data-lang="pt">Português</button>
+          <button data-lang="en"
+            class="lang-btn active px-3 py-1.5 rounded-full text-[.74rem] font-bold tracking-tight cursor-pointer
+                   text-indigo-300 border border-indigo-800/60 bg-[#0b0a20]/70 transition
+                   hover:text-white hover:border-indigo-400/90
+                   [&.active]:bg-[linear-gradient(135deg,#6366f1,#2dd4bf)]
+                   [&.active]:text-[#04121c] [&.active]:border-transparent
+                   [&.active]:shadow-[0_6px_20px_-8px_rgba(99,102,241,.95)]">English</button>
+          <button data-lang="es"
+            class="lang-btn px-3 py-1.5 rounded-full text-[.74rem] font-bold tracking-tight cursor-pointer
+                   text-indigo-300 border border-indigo-800/60 bg-[#0b0a20]/70 transition
+                   hover:text-white hover:border-indigo-400/90
+                   [&.active]:bg-[linear-gradient(135deg,#6366f1,#2dd4bf)]
+                   [&.active]:text-[#04121c] [&.active]:border-transparent
+                   [&.active]:shadow-[0_6px_20px_-8px_rgba(99,102,241,.95)]">Español</button>
+          <button data-lang="pt"
+            class="lang-btn px-3 py-1.5 rounded-full text-[.74rem] font-bold tracking-tight cursor-pointer
+                   text-indigo-300 border border-indigo-800/60 bg-[#0b0a20]/70 transition
+                   hover:text-white hover:border-indigo-400/90
+                   [&.active]:bg-[linear-gradient(135deg,#6366f1,#2dd4bf)]
+                   [&.active]:text-[#04121c] [&.active]:border-transparent
+                   [&.active]:shadow-[0_6px_20px_-8px_rgba(99,102,241,.95)]">Português</button>
         </div>
 
-        <div class="credit-chip">
+        <div class="flex items-center gap-3 px-3.5 py-2 rounded-xl
+                    bg-[#08071a]/70 backdrop-blur-md border border-indigo-500/40
+                    shadow-[0_8px_24px_-12px_rgba(0,0,0,.9)] text-[.7rem]">
           <div class="w-8 h-8 rounded-lg grid place-items-center font-black text-[#04121c] text-xs"
                style="background:linear-gradient(135deg,#5eead4,#818cf8);">V</div>
           <div class="leading-tight">
@@ -64,24 +113,34 @@
         </div>
       </div>
 
-      <!-- Bloque principal (abajo-izquierda) -->
-      <div class="hero-banner__main">
-        <span class="badge">
-          <span class="dot"></span>
+      <!-- Bloque principal -->
+      <div class="mt-auto max-w-[46rem]">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full
+                     text-[.68rem] font-bold tracking-[.12em] uppercase text-teal-200
+                     border border-teal-400/35
+                     bg-[linear-gradient(135deg,rgba(45,212,191,.14),rgba(99,102,241,.14))]
+                     shadow-[0_0_22px_-6px_rgba(45,212,191,.5)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_10px_#2dd4bf] animate-pulse-soft"></span>
           <span data-i18n="badge">PokeAlliance Community Tool</span>
         </span>
 
-        <h1 class="grad-text mt-3 text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight"
-            data-i18n="title">PokeAlliance Pokémon Builder</h1>
+        <h1 data-i18n="title"
+            class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight
+                   bg-[linear-gradient(92deg,#5eead4_0%,#818cf8_45%,#c084fc_100%)] bg-clip-text text-transparent
+                   drop-shadow-[0_0_26px_rgba(99,102,241,.45)]">PokeAlliance Pokémon Builder</h1>
 
-        <p class="mt-2 text-sm sm:text-base text-indigo-100/80" data-i18n="subtitle">
+        <p data-i18n="subtitle" class="mt-2 text-sm sm:text-base text-indigo-100/80">
           Calculate the total investment to build your Pokémon.
         </p>
       </div>
     </div>
 
-    <!-- Botón flotante del creador para cambiar la imagen -->
-    <button class="hero-banner__edit" id="heroBannerEdit" type="button">
+    <!-- Botón flotante del creador -->
+    <button id="heroBannerEdit" type="button"
+      class="absolute right-3.5 bottom-3.5 z-[3] inline-flex items-center gap-1.5 px-3 py-1.5
+             rounded-lg text-[.68rem] font-extrabold tracking-wider uppercase text-indigo-200
+             bg-[#08071a]/80 border border-indigo-500/55 backdrop-blur-md cursor-pointer opacity-60
+             transition hover:opacity-100 hover:text-white hover:border-indigo-400/95">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -92,75 +151,139 @@
     </button>
   </header>
 
-  <!-- Input oculto que dispara el picker del banner -->
-  <input type="file" id="heroBannerInput" accept="image/*" class="sr-only-input">
+  <input type="file" id="heroBannerInput" accept="image/*" class="sr-only">
 
 
   <!-- ============================================================
-       SUMMARY CARDS (fila superior)
+       SUMMARY CARDS
        ============================================================ -->
-  <section class="grid gap-4 sm:gap-5 md:grid-cols-3 mb-6 rise" style="animation-delay:.05s">
+  <section class="grid gap-4 sm:gap-5 md:grid-cols-3 mb-6 animate-rise" style="animation-delay:.05s">
 
-    <!-- Total Pokédollars -->
-    <div class="card card-glow">
-      <div class="lbl" data-i18n="sumPd">Total Investment • Pokédollars</div>
-      <div class="mt-3 text-3xl sm:text-4xl font-black metric-value break-all" id="sumPdFull">0</div>
+    <div class="card-glow relative rounded-2xl border border-indigo-800/60
+                bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                backdrop-blur-md p-5 sm:p-6
+                shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                transition duration-300 hover:border-indigo-500/65
+                hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]">
+      <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="sumPd">Total Investment • Pokédollars</div>
+      <div class="mt-3 text-3xl sm:text-4xl font-black tabular-nums tracking-tight text-white break-all" id="sumPdFull">0</div>
       <div class="mt-1 text-lg font-extrabold text-teal-300" id="sumPdAbbr">$0</div>
-      <div class="muted mt-1" data-i18n="sumPdSub">Total spent in Pokédollars</div>
+      <div class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-1" data-i18n="sumPdSub">Total spent in Pokédollars</div>
     </div>
 
-    <!-- Total DD -->
-    <div class="card card-glow">
-      <div class="lbl" data-i18n="sumDd">Total Investment • Diamonds (DD)</div>
-      <div class="mt-3 text-3xl sm:text-4xl font-black metric-value text-indigo-200" id="sumDdFull">0.00 DD</div>
+    <div class="card-glow relative rounded-2xl border border-indigo-800/60
+                bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                backdrop-blur-md p-5 sm:p-6
+                shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                transition duration-300 hover:border-indigo-500/65
+                hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]">
+      <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="sumDd">Total Investment • Diamonds (DD)</div>
+      <div class="mt-3 text-3xl sm:text-4xl font-black tabular-nums tracking-tight text-indigo-200" id="sumDdFull">0.00 DD</div>
       <div class="mt-1 text-lg font-extrabold text-violet-300" id="sumDdEq">≈ $0</div>
-      <div class="muted mt-1" data-i18n="sumDdSub">Market valuation equivalent</div>
+      <div class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-1" data-i18n="sumDdSub">Market valuation equivalent</div>
     </div>
 
-    <!-- Breakdown overview -->
-    <div class="card card-glow">
-      <div class="lbl mb-2" data-i18n="sumBreak">Breakdown Overview</div>
+    <div class="card-glow relative rounded-2xl border border-indigo-800/60
+                bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                backdrop-blur-md p-5 sm:p-6
+                shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                transition duration-300 hover:border-indigo-500/65
+                hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]">
+      <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 mb-2" data-i18n="sumBreak">Breakdown Overview</div>
       <ul id="sumBreakdown" class="text-sm"></ul>
     </div>
   </section>
 
 
   <!-- ============================================================
-       CONFIGURACIÓN — grid principal
+       CONFIG GRID
        ============================================================ -->
   <div class="grid gap-4 sm:gap-5 lg:grid-cols-2 mb-6">
 
-    <!-- ========== 1. MARKET VALUES ========== -->
-    <section class="card rise" style="animation-delay:.10s">
-      <div class="sec-head">
-        <div class="sec-num">1</div>
+    <!-- 1. MARKET -->
+    <section class="relative rounded-2xl border border-indigo-800/60
+                    bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                    backdrop-blur-md p-5 sm:p-6 animate-rise
+                    shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                    transition duration-300 hover:border-indigo-500/65
+                    hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+             style="animation-delay:.10s">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem]
+                    text-[.8rem] font-extrabold text-[#04212b]
+                    bg-[linear-gradient(135deg,#5eead4,#818cf8)]
+                    shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">1</div>
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s1">Market Values</h2>
-          <p class="muted" data-i18n="s1sub">Server economy setup</p>
+          <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="s1sub">Server economy setup</p>
         </div>
       </div>
 
-      <label class="lbl block mb-1.5" for="diamondPrice" data-i18n="diamondPrice">Diamond price (Pokédollars per DD)</label>
+      <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+             for="diamondPrice" data-i18n="diamondPrice">Diamond price (Pokédollars per DD)</label>
       <div class="relative">
-        <input id="diamondPrice" class="inp pr-20" type="number" min="0" step="any" placeholder="295000">
-        <span class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-lg text-[.68rem] font-extrabold
-                     text-teal-200 bg-teal-500/15 border border-teal-400/30 pointer-events-none">$/DD</span>
+        <input id="diamondPrice"
+          class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white
+                 px-3.5 py-2.5 pr-20 text-sm font-semibold outline-none transition
+                 placeholder:text-[#525178] placeholder:font-normal
+                 hover:border-indigo-500/75
+                 focus:border-teal-400/85 focus:bg-[#0a091e]/95
+                 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]"
+          type="number" min="0" step="any" placeholder="295000">
+        <span class="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-lg
+                     text-[.68rem] font-extrabold text-teal-200
+                     bg-teal-500/15 border border-teal-400/30 pointer-events-none">$/DD</span>
       </div>
-      <p class="muted mt-1.5" data-i18n="diamondPriceHelp">Set the current Diamond price on your server</p>
+      <p class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-1.5" data-i18n="diamondPriceHelp">Set the current Diamond price on your server</p>
 
-      <div class="divider my-4"></div>
+      <div class="h-px bg-gradient-to-r from-transparent via-indigo-500/45 to-transparent my-4"></div>
 
-      <div class="lbl mb-2" data-i18n="dittoBall">Normal ball</div>
+      <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 mb-2" data-i18n="dittoBall">Normal ball</div>
       <div class="grid grid-cols-3 gap-2">
-        <button class="pill" data-ball="UB">UB<small>Ultra Ball</small></button>
-        <button class="pill active" data-ball="AB">AB<small>Alliance Ball</small></button>
-        <button class="pill" data-ball="PB">PB<small>Premier Ball</small></button>
+        <button data-ball="UB"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                 hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                 disabled:opacity-30 disabled:cursor-not-allowed
+                 [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                 [&.active]:border-transparent [&.active]:text-[#04121c]
+                 [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">
+          UB<small class="block text-[.6rem] font-semibold opacity-75 tracking-[.03em]">Ultra Ball</small>
+        </button>
+        <button data-ball="AB"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                 hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                 disabled:opacity-30 disabled:cursor-not-allowed
+                 [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                 [&.active]:border-transparent [&.active]:text-[#04121c]
+                 [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)] active">
+          AB<small class="block text-[.6rem] font-semibold opacity-75 tracking-[.03em]">Alliance Ball</small>
+        </button>
+        <button data-ball="PB"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                 hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                 disabled:opacity-30 disabled:cursor-not-allowed
+                 [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                 [&.active]:border-transparent [&.active]:text-[#04121c]
+                 [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">
+          PB<small class="block text-[.6rem] font-semibold opacity-75 tracking-[.03em]">Premier Ball</small>
+        </button>
       </div>
 
       <div class="mt-4">
-        <label class="lbl block mb-1.5" for="dittoPrice" data-i18n="dittoPrice">Normal price</label>
-        <input id="dittoPrice" class="inp" type="number" min="0" step="any" placeholder="0">
-        <p class="muted mt-1.5">
+        <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+               for="dittoPrice" data-i18n="dittoPrice">Normal price</label>
+        <input id="dittoPrice"
+          class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white
+                 px-3.5 py-2.5 text-sm font-semibold outline-none transition
+                 placeholder:text-[#525178] placeholder:font-normal
+                 hover:border-indigo-500/75
+                 focus:border-teal-400/85 focus:bg-[#0a091e]/95
+                 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]"
+          type="number" min="0" step="any" placeholder="0">
+        <p class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-1.5">
           <span data-i18n="ddEquiv">DD equivalent</span>:
           <span class="font-extrabold text-teal-300" id="dittoDd">0.00 DD</span>
         </p>
@@ -168,70 +291,112 @@
     </section>
 
 
-    <!-- ========== 2. SHINY DNA & MEMORIES ========== -->
-    <section class="card rise" style="animation-delay:.14s">
-      <div class="sec-head">
-        <div class="sec-num">2</div>
+    <!-- 2. DNA & MEMORIES -->
+    <section class="relative rounded-2xl border border-indigo-800/60
+                    bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                    backdrop-blur-md p-5 sm:p-6 animate-rise
+                    shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                    transition duration-300 hover:border-indigo-500/65
+                    hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+             style="animation-delay:.14s">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem]
+                    text-[.8rem] font-extrabold text-[#04212b]
+                    bg-[linear-gradient(135deg,#5eead4,#818cf8)]
+                    shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">2</div>
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s2">Shiny DNA &amp; Memories</h2>
-          <p class="muted" data-i18n="s2sub">Unlock the shiny form</p>
+          <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="s2sub">Unlock the shiny form</p>
         </div>
       </div>
 
       <div class="flex items-center justify-between gap-3 mb-3">
         <div>
-          <div class="lbl" data-i18n="shinyDna">Shiny DNA</div>
-          <div class="muted"><span data-i18n="dnaFixed">Fixed cost</span>: 150 DD</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="shinyDna">Shiny DNA</div>
+          <div class="text-[.72rem] text-indigo-200/60 leading-relaxed"><span data-i18n="dnaFixed">Fixed cost</span>: 150 DD</div>
         </div>
         <div class="grid grid-cols-2 gap-2 w-40">
-          <button class="pill active" data-dna="1" data-i18n="yes">Yes</button>
-          <button class="pill" data-dna="0" data-i18n="no">No</button>
+          <button data-dna="1"
+            class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                   font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                   hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                   disabled:opacity-30 disabled:cursor-not-allowed
+                   [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                   [&.active]:border-transparent [&.active]:text-[#04121c]
+                   [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)] active"
+            data-i18n="yes">Yes</button>
+          <button data-dna="0"
+            class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                   font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                   hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                   disabled:opacity-30 disabled:cursor-not-allowed
+                   [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                   [&.active]:border-transparent [&.active]:text-[#04121c]
+                   [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]"
+            data-i18n="no">No</button>
         </div>
       </div>
 
-      <div class="divider my-4"></div>
+      <div class="h-px bg-gradient-to-r from-transparent via-indigo-500/45 to-transparent my-4"></div>
 
-      <div class="lbl mb-2" data-i18n="totalMemories">Total memories</div>
+      <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 mb-2" data-i18n="totalMemories">Total memories</div>
       <div class="grid grid-cols-6 gap-1.5 sm:gap-2" id="memoryButtons">
-        <button class="pill active" data-mem="1">1</button>
-        <button class="pill" data-mem="2">2</button>
-        <button class="pill" data-mem="3">3</button>
-        <button class="pill" data-mem="4">4</button>
-        <button class="pill" data-mem="5">5</button>
-        <button class="pill" data-mem="6">6</button>
+        <button data-mem="1"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300
+                 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition
+                 hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100
+                 disabled:opacity-30 disabled:cursor-not-allowed
+                 [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)]
+                 [&.active]:border-transparent [&.active]:text-[#04121c]
+                 [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)] active">1</button>
+        <button data-mem="2"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100 disabled:opacity-30 disabled:cursor-not-allowed [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)] [&.active]:border-transparent [&.active]:text-[#04121c] [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">2</button>
+        <button data-mem="3"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100 disabled:opacity-30 disabled:cursor-not-allowed [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)] [&.active]:border-transparent [&.active]:text-[#04121c] [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">3</button>
+        <button data-mem="4"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100 disabled:opacity-30 disabled:cursor-not-allowed [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)] [&.active]:border-transparent [&.active]:text-[#04121c] [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">4</button>
+        <button data-mem="5"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100 disabled:opacity-30 disabled:cursor-not-allowed [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)] [&.active]:border-transparent [&.active]:text-[#04121c] [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">5</button>
+        <button data-mem="6"
+          class="rounded-xl border border-indigo-800/60 bg-[#0b0a20]/75 text-indigo-300 font-bold text-sm py-2 px-1 cursor-pointer text-center leading-tight transition hover:-translate-y-0.5 hover:border-indigo-400/85 hover:text-indigo-100 disabled:opacity-30 disabled:cursor-not-allowed [&.active]:bg-[linear-gradient(135deg,#6366f1_0%,#3b82f6_45%,#2dd4bf_100%)] [&.active]:border-transparent [&.active]:text-[#04121c] [&.active]:shadow-[0_8px_24px_-8px_rgba(99,102,241,.95),0_0_18px_-6px_rgba(45,212,191,.8)]">6</button>
       </div>
-      <p class="muted mt-2" data-i18n="memoryHelp">
+      <p class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-2" data-i18n="memoryHelp">
         Non-cumulative cost table: 1→0 DD, 2→40 DD, 3→50 DD, 4→60 DD, 5→70 DD, 6→80 DD
       </p>
 
       <div class="mt-4 grid grid-cols-2 gap-3">
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="memoryCost">Memories cost</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="memoryCost">Memories cost</div>
           <div class="mt-1 text-lg font-extrabold text-teal-300" id="memCostDd">0.00 DD</div>
-          <div class="muted" id="memCostPd">$0</div>
+          <div class="text-[.72rem] text-indigo-200/60 leading-relaxed" id="memCostPd">$0</div>
         </div>
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="dnaTotal">DNA + memories total</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="dnaTotal">DNA + memories total</div>
           <div class="mt-1 text-lg font-extrabold text-violet-300" id="dnaMemTotal">150.00 DD</div>
-          <div class="muted" id="dnaMemTotalPd">$0</div>
+          <div class="text-[.72rem] text-indigo-200/60 leading-relaxed" id="dnaMemTotalPd">$0</div>
         </div>
       </div>
     </section>
   </div>
 
 
-  <!-- ========== 3. HELD INVESTMENTS ========== -->
-  <section class="card mb-6 rise" style="animation-delay:.18s">
-    <div class="sec-head">
-      <div class="sec-num">3</div>
+  <!-- 3. HELD INVESTMENTS -->
+  <section class="relative rounded-2xl border border-indigo-800/60
+                  bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                  backdrop-blur-md p-5 sm:p-6 mb-6 animate-rise
+                  shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                  transition duration-300 hover:border-indigo-500/65
+                  hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+           style="animation-delay:.18s">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem] text-[.8rem] font-extrabold text-[#04212b] bg-[linear-gradient(135deg,#5eead4,#818cf8)] shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">3</div>
       <div>
         <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s3">Held Investments (X-Held &amp; Y-Held)</h2>
-        <p class="muted" data-i18n="s3sub">Optional held item upgrades</p>
+        <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="s3sub">Optional held item upgrades</p>
       </div>
     </div>
 
     <div class="grid gap-5 lg:grid-cols-2">
-
       <!-- X-Held -->
       <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/45 p-4">
         <div class="flex items-center justify-between gap-3 mb-3">
@@ -240,12 +405,15 @@
                   style="background:linear-gradient(135deg,#5eead4,#6366f1)">X</span>
             <span class="font-extrabold text-white text-sm" data-i18n="xHeld">X-Held</span>
           </div>
-          <select id="xHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
+          <select id="xHeldTier"
+            class="select-caret w-auto rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white
+                   px-3 py-2 text-xs font-semibold outline-none cursor-pointer
+                   hover:border-indigo-500/75 focus:border-teal-400/85"></select>
         </div>
         <div id="xHeldInputs"></div>
-        <div class="divider my-3"></div>
+        <div class="h-px bg-gradient-to-r from-transparent via-indigo-500/45 to-transparent my-3"></div>
         <div class="flex items-center justify-between">
-          <span class="lbl" data-i18n="heldTotal">Total</span>
+          <span class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="heldTotal">Total</span>
           <span class="font-extrabold text-teal-300" id="xHeldTotalDd">0.00 DD</span>
         </div>
       </div>
@@ -258,12 +426,15 @@
                   style="background:linear-gradient(135deg,#a855f7,#6366f1)">Y</span>
             <span class="font-extrabold text-white text-sm" data-i18n="yHeld">Y-Held</span>
           </div>
-          <select id="yHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
+          <select id="yHeldTier"
+            class="select-caret w-auto rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white
+                   px-3 py-2 text-xs font-semibold outline-none cursor-pointer
+                   hover:border-indigo-500/75 focus:border-teal-400/85"></select>
         </div>
         <div id="yHeldInputs"></div>
-        <div class="divider my-3"></div>
+        <div class="h-px bg-gradient-to-r from-transparent via-indigo-500/45 to-transparent my-3"></div>
         <div class="flex items-center justify-between">
-          <span class="lbl" data-i18n="heldTotal">Total</span>
+          <span class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="heldTotal">Total</span>
           <span class="font-extrabold text-teal-300" id="yHeldTotalDd">0.00 DD</span>
         </div>
       </div>
@@ -273,124 +444,158 @@
 
   <div class="grid gap-4 sm:gap-5 lg:grid-cols-2 mb-6">
 
-    <!-- ========== 4. ATTACK TRAINING ========== -->
-    <section class="card rise" style="animation-delay:.22s">
-      <div class="sec-head">
-        <div class="sec-num">4</div>
+    <!-- 4. ATTACK TRAINING -->
+    <section class="relative rounded-2xl border border-indigo-800/60
+                    bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                    backdrop-blur-md p-5 sm:p-6 animate-rise
+                    shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                    transition duration-300 hover:border-indigo-500/65
+                    hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+             style="animation-delay:.22s">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem] text-[.8rem] font-extrabold text-[#04212b] bg-[linear-gradient(135deg,#5eead4,#818cf8)] shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">4</div>
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s4">Attack Training (Optional / Advanced)</h2>
-          <p class="muted" data-i18n="s4sub">Charge-based attack levelling</p>
+          <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="s4sub">Charge-based attack levelling</p>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="lbl block mb-1.5" for="trainCurrent" data-i18n="currentLvl">Current attack level</label>
-          <input id="trainCurrent" class="inp" type="number" min="0" step="1" placeholder="0">
+          <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+                 for="trainCurrent" data-i18n="currentLvl">Current attack level</label>
+          <input id="trainCurrent" type="number" min="0" step="1" placeholder="0"
+            class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white px-3.5 py-2.5 text-sm font-semibold outline-none transition placeholder:text-[#525178] placeholder:font-normal hover:border-indigo-500/75 focus:border-teal-400/85 focus:bg-[#0a091e]/95 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]">
         </div>
         <div>
-          <label class="lbl block mb-1.5" for="trainTarget" data-i18n="targetLvl">Target attack level</label>
-          <input id="trainTarget" class="inp" type="number" min="0" step="1" placeholder="0">
+          <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+                 for="trainTarget" data-i18n="targetLvl">Target attack level</label>
+          <input id="trainTarget" type="number" min="0" step="1" placeholder="0"
+            class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white px-3.5 py-2.5 text-sm font-semibold outline-none transition placeholder:text-[#525178] placeholder:font-normal hover:border-indigo-500/75 focus:border-teal-400/85 focus:bg-[#0a091e]/95 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]">
         </div>
       </div>
 
       <div class="mt-3">
-        <label class="lbl block mb-1.5" for="trainProgress" data-i18n="progressPct">% progress to next level</label>
-        <input id="trainProgress" class="inp" type="number" min="0" max="100" step="1" placeholder="0">
+        <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+               for="trainProgress" data-i18n="progressPct">% progress to next level</label>
+        <input id="trainProgress" type="number" min="0" max="100" step="1" placeholder="0"
+          class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white px-3.5 py-2.5 text-sm font-semibold outline-none transition placeholder:text-[#525178] placeholder:font-normal hover:border-indigo-500/75 focus:border-teal-400/85 focus:bg-[#0a091e]/95 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]">
       </div>
 
       <div class="mt-3">
         <div class="flex items-center justify-between mb-1.5">
-          <span class="lbl" data-i18n="progress">Progress</span>
+          <span class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="progress">Progress</span>
           <span class="text-xs font-extrabold text-teal-300" id="trProgressLabel">0%</span>
         </div>
-        <div class="bar-track"><div class="bar-fill" id="trBar"></div></div>
+        <div class="h-2.5 rounded-full bg-[#08071a]/85 border border-indigo-800/60 overflow-hidden">
+          <div id="trBar"
+               class="h-full w-0 rounded-full
+                      bg-[linear-gradient(90deg,#14b8a6,#6366f1,#a855f7)]
+                      shadow-[0_0_16px_rgba(99,102,241,.9)]
+                      transition-[width] duration-[350ms] ease-[cubic-bezier(.4,0,.2,1)]"></div>
+        </div>
       </div>
 
       <div class="mt-3">
-        <label class="lbl block mb-1.5" for="trainDdRate" data-i18n="ddPerCharger">DD per 20K charger</label>
-        <input id="trainDdRate" class="inp" type="number" min="0" step="any" placeholder="0">
+        <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+               for="trainDdRate" data-i18n="ddPerCharger">DD per 20K charger</label>
+        <input id="trainDdRate" type="number" min="0" step="any" placeholder="0"
+          class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white px-3.5 py-2.5 text-sm font-semibold outline-none transition placeholder:text-[#525178] placeholder:font-normal hover:border-indigo-500/75 focus:border-teal-400/85 focus:bg-[#0a091e]/95 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]">
       </div>
 
       <div class="mt-4 grid grid-cols-2 gap-2.5">
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="chargesTotal">Total charges from 0 to current</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="chargesTotal">Total charges from 0 to current</div>
           <div class="mt-1 text-base font-extrabold text-white" id="trCharges">0</div>
         </div>
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="chargers20k">20K charger equivalents</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="chargers20k">20K charger equivalents</div>
           <div class="mt-1 text-base font-extrabold text-white" id="trChargers">0.00</div>
         </div>
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="trainTime">Training time (hours)</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="trainTime">Training time (hours)</div>
           <div class="mt-1 text-base font-extrabold text-white" id="trHours">0.00</div>
         </div>
         <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="trainCostDd">Training cost (DD)</div>
+          <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="trainCostDd">Training cost (DD)</div>
           <div class="mt-1 text-base font-extrabold text-teal-300" id="trDd">0.00 DD</div>
-          <div class="muted" id="trPd">$0</div>
+          <div class="text-[.72rem] text-indigo-200/60 leading-relaxed" id="trPd">$0</div>
         </div>
       </div>
 
-      <div class="help-box mt-3">
+      <div class="mt-3 text-[.7rem] leading-relaxed text-indigo-200/70
+                  bg-[#08071a]/60 border border-dashed border-indigo-500/40 rounded-xl px-3 py-2.5">
         <span class="font-extrabold text-teal-300" data-i18n="formulaTitle">Formula</span><br>
         <span id="formulaText"></span>
       </div>
     </section>
 
 
-    <!-- ========== 5. OTHER EXPENSES ========== -->
-    <section class="card rise" style="animation-delay:.26s">
-      <div class="sec-head">
-        <div class="sec-num">5</div>
+    <!-- 5. OTHER EXPENSES -->
+    <section class="relative rounded-2xl border border-indigo-800/60
+                    bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                    backdrop-blur-md p-5 sm:p-6 animate-rise
+                    shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                    transition duration-300 hover:border-indigo-500/65
+                    hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+             style="animation-delay:.26s">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem] text-[.8rem] font-extrabold text-[#04212b] bg-[linear-gradient(135deg,#5eead4,#818cf8)] shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">5</div>
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s5">Other Expenses</h2>
-          <p class="muted" data-i18n="s5sub">Anything else you spend</p>
+          <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="s5sub">Anything else you spend</p>
         </div>
       </div>
 
-      <label class="lbl block mb-1.5" for="otherExpenses" data-i18n="otherExpenses">Additional expenses (Pokédollars)</label>
-      <input id="otherExpenses" class="inp" type="number" min="0" step="any" placeholder="0">
-      <p class="muted mt-1.5">
+      <label class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70 block mb-1.5"
+             for="otherExpenses" data-i18n="otherExpenses">Additional expenses (Pokédollars)</label>
+      <input id="otherExpenses" type="number" min="0" step="any" placeholder="0"
+        class="w-full rounded-xl border border-indigo-800/60 bg-[#08071a]/80 text-white px-3.5 py-2.5 text-sm font-semibold outline-none transition placeholder:text-[#525178] placeholder:font-normal hover:border-indigo-500/75 focus:border-teal-400/85 focus:bg-[#0a091e]/95 focus:shadow-[0_0_0_3px_rgba(45,212,191,.14),0_0_22px_-8px_rgba(45,212,191,.7)]">
+      <p class="text-[.72rem] text-indigo-200/60 leading-relaxed mt-1.5">
         <span data-i18n="ddEquiv">DD equivalent</span>:
         <span class="font-extrabold text-teal-300" id="otherDd">0.00 DD</span>
       </p>
 
-      <div class="divider my-4"></div>
+      <div class="h-px bg-gradient-to-r from-transparent via-indigo-500/45 to-transparent my-4"></div>
 
       <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-4">
-        <div class="lbl" data-i18n="sumPd">Total Investment • Pokédollars</div>
-        <div class="mt-1 text-2xl font-black metric-value" id="miniPd">0</div>
+        <div class="text-[.68rem] tracking-[.13em] uppercase font-bold text-indigo-200/70" data-i18n="sumPd">Total Investment • Pokédollars</div>
+        <div class="mt-1 text-2xl font-black tabular-nums text-white" id="miniPd">0</div>
         <div class="text-sm font-extrabold text-teal-300" id="miniPdAbbr">$0</div>
       </div>
     </section>
   </div>
 
 
-  <!-- ============================================================
-       DETAILED BREAKDOWN TABLE
-       ============================================================ -->
-  <section class="card mb-6 rise" style="animation-delay:.30s">
-    <div class="sec-head">
-      <div class="sec-num">Σ</div>
+  <!-- DETAILED BREAKDOWN TABLE -->
+  <section class="relative rounded-2xl border border-indigo-800/60
+                  bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                  backdrop-blur-md p-5 sm:p-6 mb-6 animate-rise
+                  shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                  transition duration-300 hover:border-indigo-500/65
+                  hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+           style="animation-delay:.30s">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem] text-[.8rem] font-extrabold text-[#04212b] bg-[linear-gradient(135deg,#5eead4,#818cf8)] shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">Σ</div>
       <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="tblTitle">Detailed Breakdown</h2>
     </div>
 
     <div class="overflow-x-auto -mx-1 px-1">
-      <table class="tbl min-w-[520px]">
+      <table class="w-full border-separate border-spacing-0 text-sm min-w-[520px]
+                    [&>tbody>tr:hover>td]:bg-indigo-500/[.07]">
         <thead>
           <tr>
-            <th data-i18n="tblComponent">Component</th>
-            <th class="text-right" data-i18n="tblPd">Pokédollars ($)</th>
-            <th class="text-right" data-i18n="tblDd">Diamonds (DD)</th>
+            <th class="text-[.66rem] tracking-[.12em] uppercase text-indigo-300/75 font-extrabold px-3.5 py-2.5 text-left border-b border-indigo-800/60 whitespace-nowrap" data-i18n="tblComponent">Component</th>
+            <th class="text-[.66rem] tracking-[.12em] uppercase text-indigo-300/75 font-extrabold px-3.5 py-2.5 text-right border-b border-indigo-800/60 whitespace-nowrap" data-i18n="tblPd">Pokédollars ($)</th>
+            <th class="text-[.66rem] tracking-[.12em] uppercase text-indigo-300/75 font-extrabold px-3.5 py-2.5 text-right border-b border-indigo-800/60 whitespace-nowrap" data-i18n="tblDd">Diamonds (DD)</th>
           </tr>
         </thead>
         <tbody id="tblBody"></tbody>
         <tfoot>
           <tr>
-            <td class="text-teal-200" data-i18n="rowTotal">TOTAL INVESTMENT</td>
-            <td class="num text-teal-200" id="tblTotalPd">$0</td>
-            <td class="num text-teal-200" id="tblTotalDd">0.00 DD</td>
+            <td class="px-3.5 py-3.5 font-extrabold text-teal-200 bg-gradient-to-r from-teal-400/15 to-indigo-500/15 border-t border-teal-400/40" data-i18n="rowTotal">TOTAL INVESTMENT</td>
+            <td class="px-3.5 py-3.5 font-extrabold text-teal-200 bg-gradient-to-r from-teal-400/15 to-indigo-500/15 border-t border-teal-400/40 text-right tabular-nums" id="tblTotalPd">$0</td>
+            <td class="px-3.5 py-3.5 font-extrabold text-teal-200 bg-gradient-to-r from-teal-400/15 to-indigo-500/15 border-t border-teal-400/40 text-right tabular-nums" id="tblTotalDd">0.00 DD</td>
           </tr>
         </tfoot>
       </table>
@@ -398,102 +603,38 @@
   </section>
 
 
-  <!-- ============================================================
-       IN-GAME EXPORT / COPY TO CLIPBOARD
-       ============================================================ -->
-  <section class="card mb-6 rise" style="animation-delay:.34s">
-    <div class="sec-head">
-      <div class="sec-num">↗</div>
+  <!-- EXPORT -->
+  <section class="relative rounded-2xl border border-indigo-800/60
+                  bg-gradient-to-br from-[#26215c]/60 to-[#0e0c26]/75
+                  backdrop-blur-md p-5 sm:p-6 mb-6 animate-rise
+                  shadow-[0_18px_45px_-22px_rgba(0,0,0,.9),inset_0_1px_0_rgba(255,255,255,.05)]
+                  transition duration-300 hover:border-indigo-500/65
+                  hover:shadow-[0_24px_55px_-22px_rgba(0,0,0,.95),0_0_0_1px_rgba(99,102,241,.12),inset_0_1px_0_rgba(255,255,255,.07)]"
+           style="animation-delay:.34s">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="flex-none w-[1.9rem] h-[1.9rem] grid place-items-center rounded-[.6rem] text-[.8rem] font-extrabold text-[#04212b] bg-[linear-gradient(135deg,#5eead4,#818cf8)] shadow-[0_6px_18px_-6px_rgba(94,234,212,.85)]">↗</div>
       <div>
         <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="expTitle">In-Game Breakdown</h2>
-        <p class="muted" data-i18n="expSub">Paste this directly into the game chat</p>
+        <p class="text-[.72rem] text-indigo-200/60 leading-relaxed" data-i18n="expSub">Paste this directly into the game chat</p>
       </div>
     </div>
 
     <div class="flex flex-col lg:flex-row lg:items-center gap-3">
-      <div class="export-box flex-1" id="exportString">—</div>
-      <button class="btn-copy" id="copyBtn">
+      <div id="exportString"
+        class="flex-1 font-mono text-[.78rem] leading-relaxed text-teal-200
+               bg-[#050412]/85 border border-teal-400/30 rounded-xl px-4 py-3.5
+               break-words [overflow-wrap:anywhere]">—</div>
+
+      <button id="copyBtn"
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl
+               font-extrabold text-[.82rem] tracking-tight cursor-pointer whitespace-nowrap
+               text-[#04121c] bg-[linear-gradient(135deg,#5eead4,#6366f1)]
+               shadow-[0_10px_26px_-10px_rgba(94,234,212,.9)]
+               transition hover:-translate-y-0.5 hover:brightness-110
+               active:translate-y-0 active:scale-[.98]
+               [&.ok]:bg-[linear-gradient(135deg,#34d399,#10b981)]
+               [&.ok]:shadow-[0_10px_26px_-10px_rgba(52,211,153,.95)]">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-        <span id="copyLabel" data-i18n="copy">Copy to clipboard</span>
-      </button>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       CREATOR TOOLS  (colapsable)
-       ============================================================ -->
-  <details class="card mb-8 rise" id="creatorPanel" style="animation-delay:.38s">
-    <summary>
-      <span class="sec-num">⚙</span>
-      <span data-i18n="brandTools">Creator Tools</span>
-    </summary>
-
-    <div class="mt-4">
-      <p class="muted mb-4" data-i18n="brandHelp">
-        Upload an image for the header banner. It's saved locally in your browser. To make it
-        permanent for everyone, click "Copy as code" and paste the result into
-        BANNER_IMAGE_DEFAULT at the top of the script.
-      </p>
-
-      <div class="brand-row">
-        <div class="brand-thumb" id="brandThumb">
-          <div class="empty" data-i18n="brandEmpty">No image</div>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          <label class="btn-copy cursor-pointer" for="heroBannerInput2">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="17 8 12 3 7 8"></polyline>
-              <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
-            <span data-i18n="brandChoose">Choose image</span>
-          </label>
-          <input type="file" id="heroBannerInput2" accept="image/*" class="sr-only-input">
-
-          <button class="btn-ghost" id="brandCopyCode" type="button">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-            <span data-i18n="brandCopyCode">Copy as code</span>
-          </button>
-
-          <button class="btn-ghost danger" id="brandReset" type="button">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
-            </svg>
-            <span data-i18n="brandReset">Reset</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </details>
-
-  <footer class="text-center muted pb-6">
-    PokeAlliance Pokémon Builder — <span class="text-teal-300 font-semibold">Veil</span>
-  </footer>
-</div>
-
-
-<!-- ============================================================
-     SCRIPTS  (orden importa: i18n → state → format → formulas → ui → banner → main)
-     ============================================================ -->
-<script src="js/i18n.js"></script>
-<script src="js/state.js"></script>
-<script src="js/format.js"></script>
-<script src="js/formulas.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/banner.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 
