@@ -54,7 +54,7 @@ const I18N = {
     no: "No",
     dnaFixed: "Fixed cost",
     totalMemories: "Total memories",
-    memoryHelp: "Non-cumulative cost table: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
+    memoryHelp: "Non-cumulative cost table: 1→0 DD, 2→30 DD, 3→70 DD, 4→120 DD, 5→180 DD, 6→250 DD",
     memoryCost: "Memories cost",
     dnaTotal: "DNA + memories total",
 
@@ -152,7 +152,7 @@ const I18N = {
     no: "No",
     dnaFixed: "Costo fijo",
     totalMemories: "Recuerdos totales",
-    memoryHelp: "Tabla de costos no acumulativos: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
+    memoryHelp: "Tabla de costos no acumulativos: 1→0 DD, 2→30 DD, 3→70 DD, 4→120 DD, 5→180 DD, 6→250 DD",
     memoryCost: "Costo de recuerdos",
     dnaTotal: "Total ADN + recuerdos",
 
@@ -245,7 +245,7 @@ const I18N = {
     no: "Não",
     dnaFixed: "Custo fixo",
     totalMemories: "Total de memórias",
-    memoryHelp: "Tabela de custos não cumulativos: 1→0 DD, 2→30 DD, 3→40 DD, 4→50 DD, 5→60 DD, 6→70 DD",
+    memoryHelp: "Tabela de custos não cumulativos: 1→0 DD, 2→30 DD, 3→70 DD, 4→120 DD, 5→180 DD, 6→250 DD",
     memoryCost: "Custo das memórias",
     dnaTotal: "Total DNA + memórias",
 

@@ -20,5 +20,5 @@ const state = {
 
 /* ---------- Constantes del juego (ajústalas si cambia el server) ---------- */
 const DNA_COST_DD = 150;                          // Costo fijo de Shiny DNA
-const MEMORY_COST = [0, 40, 50, 60, 70, 80];      // NO acumulativo, index = memories-1
+const MEMORY_COST = [0, 30, 70, 120, 180, 250];      // NO acumulativo, index = memories-1
 const CHARGES_20K = 20000;                        // Un "cargador de 20K"
