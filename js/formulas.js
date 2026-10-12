@@ -13,7 +13,6 @@ const pdToDd = pd => (state.diamondPrice > 0 ? pd / state.diamondPrice : 0);
 
 /** Cargas necesarias para llegar al nivel L desde 0: 50·L·(L+1) */
 const CHARGES_BASE = 22.24;  // constante del juego (556/25)
-const CHARGES_20K       = 20000;
 const SECONDS_PER_CHARGE = 1.5;
 const HOURS_PER_CHARGER  = (CHARGES_20K * SECONDS_PER_CHARGE) / 3600;  // 8.3333...
 
