@@ -182,12 +182,12 @@ function renderComputed(){
 
   /* --- Cadena para exportar al juego --- */
   document.getElementById('exportString').textContent =
-    `Ditto ${state.ball} = ${fmt2(b.dittoDd)} DD` +
-    ` | DNA+Memory[${state.memories}] = ${fmt2(b.dnaMemDd)} DD` +
-    ` | Holds = ${fmt2(b.holdsDd)} DD` +
-    ` | Training = ${fmt2(b.trainDd)} DD` +
-    ` | Extras = ${fmt2(b.otherDd)} DD` +
-    ` || Total = $${abbreviate(b.totalPd)} / ${fmt2(b.totalDd)} DD`;
+    `Pokemon ${state.ball} = ${fmt2(b.dittoDd)} DD` +
+  ` | DNA+Memory[${state.memories}] = ${fmt2(b.dnaMemDd)} DD` +
+  ` | Holds = ${fmt2(b.holdsDd)} DD` +
+  ` | Training = ${fmt2(b.trainDd)} DD` +
+  ` | Extras = ${fmt2(b.otherDd)} DD` +
+  ` || Total = $${abbreviate(b.totalPd)} / ${fmt2(b.totalDd)} DD`;
 }
 
 
