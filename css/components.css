@@ -45,6 +45,8 @@
           mask-composite:exclude;
   pointer-events:none;
   opacity:.85;
+  .card-glow::after{ will-change: auto; }
+  .card:hover .card-glow::after{ opacity: 1; }
 }
 
 
