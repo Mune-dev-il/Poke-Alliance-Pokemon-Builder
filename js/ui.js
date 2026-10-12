@@ -273,7 +273,7 @@ function bindEvents(){
   document.querySelectorAll('[data-mem]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (!state.dna) return;
-
+          state.memories = Number(btn.dataset.mem);
       updateAll(false);
     });
   });
