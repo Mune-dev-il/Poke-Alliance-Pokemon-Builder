@@ -1,0 +1,115 @@
+/* ============================================================
+   css/main.css
+   Reset, base, fondo, tipografía y utilidades globales.
+   ------------------------------------------------------------
+   Se carga PRIMERO. Define las variables de diseño.
+   ============================================================ */
+
+/* ---------- 1. Reset básico ---------- */
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color:#e6e8f5;
+  background-color:#0d0b21;
+  background-image:
+    radial-gradient(900px 620px at 8% -8%,  rgba(99,102,241,.30), transparent 62%),
+    radial-gradient(820px 600px at 96% 2%,  rgba(45,212,191,.16), transparent 58%),
+    radial-gradient(1000px 820px at 50% 118%, rgba(139,92,246,.24), transparent 62%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+img,
+svg{
+  display:block;
+  max-width:100%;
+}
+
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+  color:inherit;
+}
+
+
+/* ---------- 2. Scrollbar personalizada ---------- */
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:rgba(8,7,24,.5); }
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#4f46e5,#2dd4bf);
+  border-radius:999px;
+  border:2px solid rgba(8,7,24,.9);
+}
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#6366f1,#5eead4);
+}
+
+
+/* ---------- 3. Utilidades tipográficas ---------- */
+
+/* Título con degradado + glow */
+.grad-text{
+  background:linear-gradient(92deg,#5eead4 0%,#818cf8 45%,#c084fc 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 26px rgba(99,102,241,.45));
+}
+
+/* Etiqueta pequeña en mayúsculas */
+.lbl{
+  font-size:.68rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:rgba(165,180,252,.72);
+}
+
+/* Texto secundario / muted */
+.muted{
+  font-size:.72rem;
+  color:rgba(165,180,252,.6);
+  line-height:1.5;
+}
+
+/* Números grandes con tabular-nums */
+.metric-value{
+  font-variant-numeric:tabular-nums;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-.01em;
+}
+
+
+/* ---------- 4. Divisor con degradado ---------- */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(99,102,241,.45), transparent);
+}
+
+
+/* ---------- 5. Input oculto accesible ---------- */
+.sr-only-input{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  border:0;
+}

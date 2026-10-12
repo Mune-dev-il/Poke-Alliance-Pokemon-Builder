@@ -1,0 +1,457 @@
+/* ============================================================
+   css/components.css
+   Componentes reutilizables: cards, badges, inputs, botones,
+   tablas, barras, chips, etc.
+   ============================================================ */
+
+
+/* ============================================================
+   1. CARD (contenedor glass)
+   ============================================================ */
+.card{
+  position:relative;
+  border-radius:1rem;
+  border:1px solid rgba(67,56,202,.45);
+  background:linear-gradient(160deg, rgba(38,33,92,.60) 0%, rgba(14,12,38,.76) 100%);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:
+    0 18px 45px -22px rgba(0,0,0,.9),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  padding:1.15rem;
+  transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+@media (min-width:640px){
+  .card{ padding:1.5rem; }
+}
+.card:hover{
+  border-color:rgba(99,102,241,.65);
+  box-shadow:
+    0 24px 55px -22px rgba(0,0,0,.95),
+    0 0 0 1px rgba(99,102,241,.12),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* Card con borde degradado brillante */
+.card-glow::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:1rem;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(45,212,191,.55), rgba(99,102,241,.15), rgba(139,92,246,.55));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  opacity:.85;
+}
+
+
+/* ============================================================
+   2. BADGE (pastilla superior)
+   ============================================================ */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  padding:.32rem .8rem;
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#99f6e4;
+  border:1px solid rgba(45,212,191,.35);
+  background:linear-gradient(135deg, rgba(45,212,191,.14), rgba(99,102,241,.14));
+  box-shadow:0 0 22px -6px rgba(45,212,191,.5);
+}
+.badge .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#2dd4bf;
+  box-shadow:0 0 10px #2dd4bf;
+  animation:pulse 2s infinite;   /* definido en animations.css */
+}
+
+
+/* ============================================================
+   3. INPUTS
+   ============================================================ */
+.inp{
+  width:100%;
+  border-radius:.75rem;
+  border:1px solid rgba(67,56,202,.55);
+  background:rgba(8,7,24,.78);
+  color:#fff;
+  padding:.68rem .9rem;
+  font-size:.95rem;
+  font-weight:600;
+  font-family:inherit;
+  outline:none;
+  transition:border-color .18s, box-shadow .18s, background .18s;
+}
+.inp::placeholder{ color:#525178; font-weight:400; }
+.inp:hover{ border-color:rgba(99,102,241,.75); }
+.inp:focus{
+  border-color:rgba(45,212,191,.85);
+  background:rgba(10,9,30,.95);
+  box-shadow:
+    0 0 0 3px rgba(45,212,191,.14),
+    0 0 22px -8px rgba(45,212,191,.7);
+}
+
+/* Quitar flechas en number */
+.inp[type=number]::-webkit-outer-spin-button,
+.inp[type=number]::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+.inp[type=number]{
+  -moz-appearance:textfield;
+  appearance:textfield;
+}
+
+/* Select usando .inp */
+select.inp{
+  cursor:pointer;
+  padding-right:2rem;
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #a5b4fc 50%),
+    linear-gradient(135deg, #a5b4fc 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(50% - 2px),
+    calc(100% - 11px) calc(50% - 2px);
+  background-size:5px 5px, 5px 5px;
+  background-repeat:no-repeat;
+}
+select.inp option{
+  background:#0d0b21;
+  color:#e6e8f5;
+}
+
+
+/* ============================================================
+   4. PILLS (botones de toggle)
+   ============================================================ */
+.pill{
+  border-radius:.7rem;
+  border:1px solid rgba(67,56,202,.5);
+  background:rgba(11,10,32,.72);
+  color:#a5b4fc;
+  font-weight:700;
+  font-size:.85rem;
+  font-family:inherit;
+  padding:.55rem .4rem;
+  cursor:pointer;
+  text-align:center;
+  line-height:1.15;
+  transition:transform .16s, border-color .16s, color .16s, background .16s, box-shadow .16s;
+}
+.pill:hover:not(:disabled){
+  border-color:rgba(129,140,248,.85);
+  color:#e0e7ff;
+  transform:translateY(-2px);
+}
+.pill.active{
+  background:linear-gradient(135deg,#6366f1 0%,#3b82f6 45%,#2dd4bf 100%);
+  border-color:transparent;
+  color:#04121c;
+  box-shadow:
+    0 8px 24px -8px rgba(99,102,241,.95),
+    0 0 18px -6px rgba(45,212,191,.8);
+}
+.pill:disabled{
+  opacity:.32;
+  cursor:not-allowed;
+}
+.pill small{
+  display:block;
+  font-size:.6rem;
+  font-weight:600;
+  opacity:.75;
+  letter-spacing:.03em;
+}
+
+
+/* ============================================================
+   5. BOTONES DE IDIOMA
+   ============================================================ */
+.lang-btn{
+  padding:.38rem .8rem;
+  border-radius:999px;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.03em;
+  font-family:inherit;
+  cursor:pointer;
+  color:#a5b4fc;
+  border:1px solid rgba(67,56,202,.55);
+  background:rgba(11,10,32,.7);
+  transition:.18s;
+}
+.lang-btn:hover{
+  color:#fff;
+  border-color:rgba(129,140,248,.9);
+}
+.lang-btn.active{
+  background:linear-gradient(135deg,#6366f1,#2dd4bf);
+  color:#04121c;
+  border-color:transparent;
+  box-shadow:0 6px 20px -8px rgba(99,102,241,.95);
+}
+
+
+/* ============================================================
+   6. BOTONES DE ACCIÓN
+   ============================================================ */
+
+/* Botón principal (Copy to clipboard) */
+.btn-copy{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.7rem 1.25rem;
+  border-radius:.75rem;
+  font-weight:800;
+  font-size:.82rem;
+  font-family:inherit;
+  letter-spacing:.02em;
+  cursor:pointer;
+  border:none;
+  color:#04121c;
+  background:linear-gradient(135deg,#5eead4,#6366f1);
+  box-shadow:0 10px 26px -10px rgba(94,234,212,.9);
+  transition:transform .16s, box-shadow .16s, filter .16s;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.btn-copy:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+}
+.btn-copy:active{
+  transform:translateY(0) scale(.98);
+}
+.btn-copy.ok{
+  background:linear-gradient(135deg,#34d399,#10b981);
+  box-shadow:0 10px 26px -10px rgba(52,211,153,.95);
+}
+
+/* Botón secundario / ghost */
+.btn-ghost{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.65rem 1.1rem;
+  border-radius:.75rem;
+  font-weight:700;
+  font-size:.8rem;
+  font-family:inherit;
+  cursor:pointer;
+  color:#c7d2fe;
+  background:rgba(11,10,32,.72);
+  border:1px solid rgba(67,56,202,.55);
+  transition:.18s;
+  white-space:nowrap;
+}
+.btn-ghost:hover{
+  color:#fff;
+  border-color:rgba(129,140,248,.9);
+  transform:translateY(-1px);
+}
+.btn-ghost.danger{
+  color:#fca5a5;
+  border-color:rgba(239,68,68,.4);
+}
+.btn-ghost.danger:hover{
+  border-color:rgba(239,68,68,.85);
+  color:#fecaca;
+}
+
+
+/* ============================================================
+   7. BARRA DE PROGRESO (Attack Training)
+   ============================================================ */
+.bar-track{
+  height:.6rem;
+  border-radius:999px;
+  background:rgba(8,7,24,.85);
+  border:1px solid rgba(67,56,202,.5);
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#14b8a6,#6366f1,#a855f7);
+  box-shadow:0 0 16px rgba(99,102,241,.9);
+  transition:width .35s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* ============================================================
+   8. TABLA DE DESGLOSE
+   ============================================================ */
+.tbl{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:.86rem;
+}
+.tbl thead th{
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(165,180,252,.75);
+  font-weight:800;
+  padding:.6rem .85rem;
+  text-align:left;
+  border-bottom:1px solid rgba(67,56,202,.5);
+  white-space:nowrap;
+}
+.tbl tbody td{
+  padding:.7rem .85rem;
+  border-bottom:1px solid rgba(67,56,202,.18);
+  color:#dbe0ff;
+}
+.tbl tbody tr:hover td{
+  background:rgba(99,102,241,.07);
+}
+.tbl .num{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  font-weight:600;
+}
+.tbl tfoot td{
+  padding:.85rem;
+  font-weight:800;
+  background:linear-gradient(90deg, rgba(45,212,191,.14), rgba(99,102,241,.16));
+  border-top:1px solid rgba(45,212,191,.4);
+}
+
+
+/* ============================================================
+   9. CAJA DE EXPORT (In-Game Breakdown)
+   ============================================================ */
+.export-box{
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:.78rem;
+  line-height:1.6;
+  color:#99f6e4;
+  background:rgba(5,4,18,.85);
+  border:1px solid rgba(45,212,191,.3);
+  border-radius:.85rem;
+  padding:.9rem 1rem;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+}
+
+
+/* ============================================================
+   10. HELP BOX (fórmula)
+   ============================================================ */
+.help-box{
+  font-size:.7rem;
+  line-height:1.6;
+  color:rgba(165,180,252,.72);
+  background:rgba(8,7,24,.6);
+  border:1px dashed rgba(99,102,241,.4);
+  border-radius:.7rem;
+  padding:.6rem .75rem;
+}
+
+
+/* ============================================================
+   11. FILA DE HELD (input con tag)
+   ============================================================ */
+.held-row{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  margin-bottom:.5rem;
+}
+.held-row .tag{
+  flex:none;
+  width:3.6rem;
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#7dd3fc;
+}
+
+
+/* ============================================================
+   12. CHIP DE CRÉDITO (sobre el banner)
+   ============================================================ */
+.credit-chip{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.55rem .9rem;
+  border-radius:.85rem;
+  background:rgba(8,7,24,.72);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(99,102,241,.4);
+  box-shadow:0 8px 24px -12px rgba(0,0,0,.9);
+  font-size:.7rem;
+}
+
+
+/* ============================================================
+   13. THUMB DE MARCA (Creator Tools)
+   ============================================================ */
+.brand-thumb{
+  width:5rem;
+  height:5rem;
+  border-radius:.9rem;
+  border:1px solid rgba(99,102,241,.55);
+  background:rgba(8,7,24,.7);
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+.brand-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.brand-thumb .empty{
+  font-size:.62rem;
+  color:rgba(165,180,252,.55);
+  text-align:center;
+  padding:.35rem;
+  line-height:1.3;
+}
+
+
+/* ============================================================
+   14. CABECERA DE SECCIÓN (número + título)
+   ============================================================ */
+.sec-head{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  margin-bottom:1rem;
+}
+.sec-num{
+  flex:none;
+  width:1.9rem;
+  height:1.9rem;
+  display:grid;
+  place-items:center;
+  border-radius:.6rem;
+  font-size:.8rem;
+  font-weight:800;
+  color:#04212b;
+  background:linear-gradient(135deg,#5eead4,#818cf8);
+  box-shadow:0 6px 18px -6px rgba(94,234,212,.85);
+}
