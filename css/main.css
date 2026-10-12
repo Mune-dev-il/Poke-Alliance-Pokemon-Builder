@@ -21,20 +21,21 @@ body{
   font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color:#e6e8f5;
   background-color:#0d0b21;
-  background-image:
-    radial-gradient(900px 620px at 8% -8%,  rgba(99,102,241,.30), transparent 62%),
-    radial-gradient(820px 600px at 96% 2%,  rgba(45,212,191,.16), transparent 58%),
-    radial-gradient(1000px 820px at 50% 118%, rgba(139,92,246,.24), transparent 62%);
-
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
 
-img,
-svg{
-  display:block;
-  max-width:100%;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    radial-gradient(900px 620px at 8% -8%,  rgba(99,102,241,.30), transparent 62%),
+    radial-gradient(820px 600px at 96% 2%,  rgba(45,212,191,.16), transparent 58%),
+    radial-gradient(1000px 820px at 50% 118%, rgba(139,92,246,.24), transparent 62%);
 }
 
 button,
