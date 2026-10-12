@@ -48,7 +48,7 @@ function computeBreakdown(){
 
   /* 2. Shiny DNA + recuerdos */
   const dnaDd    = state.dna ? DNA_COST_DD : 0;
-  const memDd    = state.dna ? MEMORY_COST[state.memories - 1];
+  const memDd    = state.dna ? MEMORY_COST[state.memories - 1] : 0;
   const dnaMemDd = dnaDd + memDd;
   const dnaMemPd = ddToPd(dnaMemDd);
 
