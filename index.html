@@ -1,133 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PokeAlliance Pokémon Builder</title>
-
-<!-- Favicon -->
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-<!-- Tailwind (utilidades) -->
-
-<!-- Tipografía -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<!-- ============================================================
-     ESTILOS  (orden importa: base → componentes → layout → animaciones)
-     ============================================================ -->
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/animations.css">
-</head>
-
-<body>
-
-<div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-
-  <!-- ============================================================
-       HERO BANNER  (imagen fija + contenido superpuesto)
-       ============================================================ -->
-  <header class="hero-banner rise mb-8" id="heroBanner">
-
-    <!-- Imagen de fondo (banner del creador) -->
-    <img class="hero-banner__img" id="heroBannerImg" alt="">
-
-    <!-- Overlay para legibilidad del texto -->
-    <div class="hero-banner__overlay"></div>
-
-    <!-- Contenido superpuesto -->
-    <div class="hero-banner__content">
-
-      <!-- Esquina superior derecha: idiomas + crédito -->
-      <div class="hero-banner__corner">
-        <div class="flex items-center gap-2" role="group" aria-label="Language">
-          <button class="lang-btn active" data-lang="en">English</button>
-          <button class="lang-btn" data-lang="es">Español</button>
-          <button class="lang-btn" data-lang="pt">Português</button>
-        </div>
-
-        <div class="credit-chip">
-          <div class="w-8 h-8 rounded-lg grid place-items-center font-black text-[#04121c] text-xs"
-               style="background:linear-gradient(135deg,#5eead4,#818cf8);">V</div>
-          <div class="leading-tight">
-            <div class="text-indigo-200/60" data-i18n="credit">Created by</div>
-            <div class="font-bold text-white">Veil
-              <span class="text-indigo-300/60 font-medium">• Discord:</span>
-              <span class="text-teal-300 font-semibold">veil</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bloque principal (abajo-izquierda) -->
-      <div class="hero-banner__main">
-        <span class="badge">
-          <span class="dot"></span>
-          <span data-i18n="badge">PokeAlliance Community Tool</span>
-        </span>
-
-        <h1 class="grad-text mt-3 text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight"
-            data-i18n="title">PokeAlliance Pokémon Builder</h1>
-
-        <p class="mt-2 text-sm sm:text-base text-indigo-100/80" data-i18n="subtitle">
-          Calculate the total investment to build your Pokémon.
-        </p>
-      </div>
-    </div>
-
-    <!-- Botón flotante del creador para cambiar la imagen -->
-    <button class="hero-banner__edit" id="heroBannerEdit" type="button">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="17 8 12 3 7 8"></polyline>
-        <line x1="12" y1="3" x2="12" y2="15"></line>
-      </svg>
-      <span data-i18n="heroChange">Change banner</span>
-    </button>
-  </header>
-
-  <!-- Input oculto que dispara el picker del banner -->
-  <input type="file" id="heroBannerInput" accept="image/*" class="sr-only-input">
-
-
-  <!-- ============================================================
-       SUMMARY CARDS (fila superior)
-       ============================================================ -->
-  <section class="grid gap-4 sm:gap-5 md:grid-cols-3 mb-6 rise">
-
-    <!-- Total Pokédollars -->
-    <div class="card card-glow">
-      <div class="lbl" data-i18n="sumPd">Total Investment • Pokédollars</div>
-      <div class="mt-3 text-3xl sm:text-4xl font-black metric-value break-all" id="sumPdFull">0</div>
-      <div class="mt-1 text-lg font-extrabold text-teal-300" id="sumPdAbbr">$0</div>
-      <div class="muted mt-1" data-i18n="sumPdSub">Total spent in Pokédollars</div>
-    </div>
-
-    <!-- Total DD -->
-    <div class="card card-glow">
-      <div class="lbl" data-i18n="sumDd">Total Investment • Diamonds (DD)</div>
-      <div class="mt-3 text-3xl sm:text-4xl font-black metric-value text-indigo-200" id="sumDdFull">0.00 DD</div>
-      <div class="mt-1 text-lg font-extrabold text-violet-300" id="sumDdEq">≈ $0</div>
-      <div class="muted mt-1" data-i18n="sumDdSub">Market valuation equivalent</div>
-    </div>
-
-    <!-- Breakdown overview -->
-    <div class="card card-glow">
-      <div class="lbl mb-2" data-i18n="sumBreak">Breakdown Overview</div>
-      <ul id="sumBreakdown" class="text-sm"></ul>
-    </div>
-  </section>
-
-
   <!-- ============================================================
        CONFIGURACIÓN — grid principal
        ============================================================ -->
-  <div class="grid gap-4 sm:gap-5 lg:grid-cols-2 mb-6">
+  <div class="grid gap-4 sm:gap-5 lg:grid-cols-3 mb-6">
 
     <!-- ========== 1. MARKET VALUES ========== -->
     <section class="card rise" style="animation-delay:.10s">
@@ -216,283 +90,58 @@
         </div>
       </div>
     </section>
+
+
+    <!-- ========== 3. HELD INVESTMENTS ========== -->
+    <section class="card rise" style="animation-delay:.18s">
+      <div class="sec-head">
+        <div class="sec-num">3</div>
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s3">Held Investments (X-Held &amp; Y-Held)</h2>
+          <p class="muted" data-i18n="s3sub">Optional held item upgrades</p>
+        </div>
+      </div>
+
+      <div class="grid gap-4">
+
+        <!-- X-Held -->
+        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/45 p-4">
+          <div class="flex items-center justify-between gap-3 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg grid place-items-center text-[.7rem] font-black text-[#04121c]"
+                    style="background:linear-gradient(135deg,#5eead4,#6366f1)">X</span>
+              <span class="font-extrabold text-white text-sm" data-i18n="xHeld">X-Held</span>
+            </div>
+            <select id="xHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
+          </div>
+          <div id="xHeldInputs"></div>
+          <div class="divider my-3"></div>
+          <div class="flex items-center justify-between">
+            <span class="lbl" data-i18n="heldTotal">Total</span>
+            <span class="font-extrabold text-teal-300" id="xHeldTotalDd">0.00 DD</span>
+          </div>
+        </div>
+
+        <!-- Y-Held -->
+        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/45 p-4">
+          <div class="flex items-center justify-between gap-3 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg grid place-items-center text-[.7rem] font-black text-[#04121c]"
+                    style="background:linear-gradient(135deg,#a855f7,#6366f1)">Y</span>
+              <span class="font-extrabold text-white text-sm" data-i18n="yHeld">Y-Held</span>
+            </div>
+            <select id="yHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
+          </div>
+          <div id="yHeldInputs"></div>
+          <div class="divider my-3"></div>
+          <div class="flex items-center justify-between">
+            <span class="lbl" data-i18n="heldTotal">Total</span>
+            <span class="font-extrabold text-teal-300" id="yHeldTotalDd">0.00 DD</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-
-
-  <!-- ========== 3. HELD INVESTMENTS ========== -->
-  <section class="card mb-6 rise" style="animation-delay:.18s">
-    <div class="sec-head">
-      <div class="sec-num">3</div>
-      <div>
-        <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s3">Held Investments (X-Held &amp; Y-Held)</h2>
-        <p class="muted" data-i18n="s3sub">Optional held item upgrades</p>
-      </div>
-    </div>
-
-    <div class="grid gap-5 lg:grid-cols-2">
-
-      <!-- X-Held -->
-      <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/45 p-4">
-        <div class="flex items-center justify-between gap-3 mb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg grid place-items-center text-[.7rem] font-black text-[#04121c]"
-                  style="background:linear-gradient(135deg,#5eead4,#6366f1)">X</span>
-            <span class="font-extrabold text-white text-sm" data-i18n="xHeld">X-Held</span>
-          </div>
-          <select id="xHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
-        </div>
-        <div id="xHeldInputs"></div>
-        <div class="divider my-3"></div>
-        <div class="flex items-center justify-between">
-          <span class="lbl" data-i18n="heldTotal">Total</span>
-          <span class="font-extrabold text-teal-300" id="xHeldTotalDd">0.00 DD</span>
-        </div>
-      </div>
-
-      <!-- Y-Held -->
-      <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/45 p-4">
-        <div class="flex items-center justify-between gap-3 mb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg grid place-items-center text-[.7rem] font-black text-[#04121c]"
-                  style="background:linear-gradient(135deg,#a855f7,#6366f1)">Y</span>
-            <span class="font-extrabold text-white text-sm" data-i18n="yHeld">Y-Held</span>
-          </div>
-          <select id="yHeldTier" class="inp !w-auto !py-2 !px-3 !text-xs"></select>
-        </div>
-        <div id="yHeldInputs"></div>
-        <div class="divider my-3"></div>
-        <div class="flex items-center justify-between">
-          <span class="lbl" data-i18n="heldTotal">Total</span>
-          <span class="font-extrabold text-teal-300" id="yHeldTotalDd">0.00 DD</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   <div class="grid gap-4 sm:gap-5 lg:grid-cols-2 mb-6">
-
-    <!-- ========== 4. ATTACK TRAINING ========== -->
-    <section class="card rise" style="animation-delay:.22s">
-      <div class="sec-head">
-        <div class="sec-num">4</div>
-        <div>
-          <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s4">Attack Training (Optional / Advanced)</h2>
-          <p class="muted" data-i18n="s4sub">Charge-based attack levelling</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="lbl block mb-1.5" for="trainCurrent" data-i18n="currentLvl">Current attack level</label>
-          <input id="trainCurrent" class="inp" type="number" min="0" step="1" placeholder="0">
-        </div>
-        <div>
-          <label class="lbl block mb-1.5" for="trainTarget" data-i18n="targetLvl">Target attack level</label>
-          <input id="trainTarget" class="inp" type="number" min="0" step="1" placeholder="0">
-        </div>
-      </div>
-
-      <div class="mt-3">
-        <label class="lbl block mb-1.5" for="trainProgress" data-i18n="progressPct">% progress to next level</label>
-        <input id="trainProgress" class="inp" type="number" min="0" max="100" step="1" placeholder="0">
-      </div>
-
-      <div class="mt-3">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="lbl" data-i18n="progress">Progress</span>
-          <span class="text-xs font-extrabold text-teal-300" id="trProgressLabel">0%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" id="trBar"></div></div>
-      </div>
-
-      <div class="mt-3">
-        <label class="lbl block mb-1.5" for="trainDdRate" data-i18n="ddPerCharger">DD per 20K charger</label>
-        <input id="trainDdRate" class="inp" type="number" min="0" step="any" placeholder="0">
-      </div>
-
-      <div class="mt-4 grid grid-cols-2 gap-2.5">
-        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="chargesTotal">Total charges from 0 to current</div>
-          <div class="mt-1 text-base font-extrabold text-white" id="trCharges">0</div>
-        </div>
-        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="chargers20k">20K charger equivalents</div>
-          <div class="mt-1 text-base font-extrabold text-white" id="trChargers">0.00</div>
-        </div>
-        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="trainTime">Training time (hours)</div>
-          <div class="mt-1 text-base font-extrabold text-white" id="trHours">0.00</div>
-        </div>
-        <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-3">
-          <div class="lbl" data-i18n="trainCostDd">Training cost (DD)</div>
-          <div class="mt-1 text-base font-extrabold text-teal-300" id="trDd">0.00 DD</div>
-          <div class="muted" id="trPd">$0</div>
-        </div>
-      </div>
-
-      <div class="help-box mt-3">
-        <span class="font-extrabold text-teal-300" data-i18n="formulaTitle">Formula</span><br>
-        <span id="formulaText"></span>
-      </div>
-    </section>
-
-
-    <!-- ========== 5. OTHER EXPENSES ========== -->
-    <section class="card rise" style="animation-delay:.26s">
-      <div class="sec-head">
-        <div class="sec-num">5</div>
-        <div>
-          <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="s5">Other Expenses</h2>
-          <p class="muted" data-i18n="s5sub">Anything else you spend</p>
-        </div>
-      </div>
-
-      <label class="lbl block mb-1.5" for="otherExpenses" data-i18n="otherExpenses">Additional expenses (Pokédollars)</label>
-      <input id="otherExpenses" class="inp" type="number" min="0" step="any" placeholder="0">
-      <p class="muted mt-1.5">
-        <span data-i18n="ddEquiv">DD equivalent</span>:
-        <span class="font-extrabold text-teal-300" id="otherDd">0.00 DD</span>
-      </p>
-
-      <div class="divider my-4"></div>
-
-      <div class="rounded-xl border border-indigo-900/50 bg-[#08071a]/60 p-4">
-        <div class="lbl" data-i18n="sumPd">Total Investment • Pokédollars</div>
-        <div class="mt-1 text-2xl font-black metric-value" id="miniPd">0</div>
-        <div class="text-sm font-extrabold text-teal-300" id="miniPdAbbr">$0</div>
-      </div>
-    </section>
-  </div>
-
-
-  <!-- ============================================================
-       DETAILED BREAKDOWN TABLE
-       ============================================================ -->
-  <section class="card mb-6 rise" style="animation-delay:.30s">
-    <div class="sec-head">
-      <div class="sec-num">Σ</div>
-      <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="tblTitle">Detailed Breakdown</h2>
-    </div>
-
-    <div class="overflow-x-auto -mx-1 px-1">
-      <table class="tbl min-w-[520px]">
-        <thead>
-          <tr>
-            <th data-i18n="tblComponent">Component</th>
-            <th class="text-right" data-i18n="tblPd">Pokédollars ($)</th>
-            <th class="text-right" data-i18n="tblDd">Diamonds (DD)</th>
-          </tr>
-        </thead>
-        <tbody id="tblBody"></tbody>
-        <tfoot>
-          <tr>
-            <td class="text-teal-200" data-i18n="rowTotal">TOTAL INVESTMENT</td>
-            <td class="num text-teal-200" id="tblTotalPd">$0</td>
-            <td class="num text-teal-200" id="tblTotalDd">0.00 DD</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       IN-GAME EXPORT / COPY TO CLIPBOARD
-       ============================================================ -->
-  <section class="card mb-6 rise" style="animation-delay:.34s">
-    <div class="sec-head">
-      <div class="sec-num">↗</div>
-      <div>
-        <h2 class="text-base sm:text-lg font-extrabold text-white" data-i18n="expTitle">In-Game Breakdown</h2>
-        <p class="muted" data-i18n="expSub">Paste this directly into the game chat</p>
-      </div>
-    </div>
-
-    <div class="flex flex-col lg:flex-row lg:items-center gap-3">
-      <div class="export-box flex-1" id="exportString">—</div>
-      <button class="btn-copy" id="copyBtn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-        <span id="copyLabel" data-i18n="copy">Copy to clipboard</span>
-      </button>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       CREATOR TOOLS  (colapsable)
-       ============================================================ -->
-  <details class="card mb-8 rise" id="creatorPanel" style="animation-delay:.38s">
-    <summary>
-      <span class="sec-num">⚙</span>
-      <span data-i18n="brandTools">Creator Tools</span>
-    </summary>
-
-    <div class="mt-4">
-      <p class="muted mb-4" data-i18n="brandHelp">
-        Upload an image for the header banner. It's saved locally in your browser. To make it
-        permanent for everyone, click "Copy as code" and paste the result into
-        BANNER_IMAGE_DEFAULT at the top of the script.
-      </p>
-
-      <div class="brand-row">
-        <div class="brand-thumb" id="brandThumb">
-          <div class="empty" data-i18n="brandEmpty">No image</div>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          <label class="btn-copy cursor-pointer" for="heroBannerInput2">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="17 8 12 3 7 8"></polyline>
-              <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
-            <span data-i18n="brandChoose">Choose image</span>
-          </label>
-          <input type="file" id="heroBannerInput2" accept="image/*" class="sr-only-input">
-
-          <button class="btn-ghost" id="brandCopyCode" type="button">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-            <span data-i18n="brandCopyCode">Copy as code</span>
-          </button>
-
-          <button class="btn-ghost danger" id="brandReset" type="button">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
-            </svg>
-            <span data-i18n="brandReset">Reset</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </details>
-
-  <footer class="text-center muted pb-6">
-    PokeAlliance Pokémon Builder — <span class="text-teal-300 font-semibold">Veil</span>
-  </footer>
-</div>
-
-
-<!-- ============================================================
-     SCRIPTS  (orden importa: i18n → state → format → formulas → ui → banner → main)
-     ============================================================ -->
-<script src="js/i18n.js"></script>
-<script src="js/state.js"></script>
-<script src="js/format.js"></script>
-<script src="js/formulas.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/banner.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>

@@ -12,9 +12,16 @@ const pdToDd = pd => (state.diamondPrice > 0 ? pd / state.diamondPrice : 0);
 /* ---------- ATTACK TRAINING ---------- */
 
 /** Cargas necesarias para llegar al nivel L desde 0: 50·L·(L+1) */
+const CHARGES_BASE = 22.24;  // constante del juego (556/25)
+const CHARGES_20K       = 20000;
+const SECONDS_PER_CHARGE = 1.5;
+const HOURS_PER_CHARGER  = (CHARGES_20K * SECONDS_PER_CHARGE) / 3600;  // 8.3333...
+
 function chargesForLevel(L){
   L = Math.max(0, Math.floor(L) || 0);
-  return 50 * L * (L + 1);
+  // Suma de cuadrados: 1²+2²+...+L² = L(L+1)(2L+1)/6
+  const sumOfSquares = L * (L + 1) * (2 * L + 1) / 6;
+  return Math.round(CHARGES_BASE * sumOfSquares);
 }
 
 /** Devuelve todas las métricas de entrenamiento desde el estado actual. */
@@ -24,21 +31,20 @@ function computeTraining(){
   const prog = Math.min(100, Math.max(0, state.train.progress || 0));
   const rate = Math.max(0, state.train.ddPerCharger || 0);
 
-  const cCur  = chargesForLevel(cur);               // cargas acumuladas a nivel actual
-  const cNext = chargesForLevel(cur + 1);           // cargas al siguiente nivel
-  const used  = cCur + (prog / 100) * (cNext - cCur);
+  const cCur  = chargesForLevel(cur);
+  const cNext = chargesForLevel(cur + 1);
+  const used  = cCur + (prog / 100) * (cNext - cCur);   // interpolación 0-100%
 
   const cTarget = chargesForLevel(Math.max(tgt, cur));
   let remaining = cTarget - used;
   if (remaining < 0) remaining = 0;
 
-  const chargers = remaining / CHARGES_20K;         // equivalentes a cargador 20K
-  const hours    = chargers;                        // 1 cargador = 1 hora
-  const dd       = chargers * rate;                 // costo en diamantes
+  const chargers = remaining / CHARGES_20K;
+  const hours    = chargers * HOURS_PER_CHARGER;         // ← corregido
+  const dd       = chargers * rate;
 
   return { cur, tgt, prog, cCur, cNext, used, cTarget, remaining, chargers, hours, dd, pd: ddToPd(dd) };
 }
-
 
 /* ---------- BREAKDOWN MAESTRO ---------- */
 function computeBreakdown(){
