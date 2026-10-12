@@ -203,7 +203,6 @@ function updateAll(rebuildHeld = true){
   });
   document.querySelectorAll('[data-mem]').forEach(btn => {
     btn.classList.toggle('active', Number(btn.dataset.mem) === state.memories);
-    btn.disabled = !state.dna;
   });
 
   if (rebuildHeld){
@@ -274,7 +273,7 @@ function bindEvents(){
   document.querySelectorAll('[data-mem]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (!state.dna) return;
-      state.memories = Number(btn.dataset.mem);
+
       updateAll(false);
     });
   });
